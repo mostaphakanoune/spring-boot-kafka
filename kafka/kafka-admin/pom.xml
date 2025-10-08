@@ -7,7 +7,6 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>kafka-admin</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>de.kanoune.spring.boot.kafka</groupId>
@@ -22,5 +21,4 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
     </dependencies>
-
 </project>
