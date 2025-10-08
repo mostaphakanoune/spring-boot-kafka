@@ -1,11 +1,10 @@
 package de.kanoune.spring.boot.kafka.twitter.to.kafka.service.runner.impl;
 
+import de.kanoune.spring.boot.kafka.app.config.data.config.TwitterToKafkaServiceConfigData;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.listener.TwitterKafkaStatusListener;
-import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.config.TwitterToKafkaServiceConfigData;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.runner.StreamRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 import twitter4j.FilterQuery;

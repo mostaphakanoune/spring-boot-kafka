@@ -1,4 +1,4 @@
-package de.kanoune.spring.boot.kafka.twitter.to.kafka.service.config;
+package de.kanoune.spring.boot.kafka.app.config.data.config;
 
 
 import lombok.Data;

@@ -1,6 +1,6 @@
 package de.kanoune.spring.boot.kafka.twitter.to.kafka.service.runner.impl;
 
-import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.config.TwitterToKafkaServiceConfigData;
+import de.kanoune.spring.boot.kafka.app.config.data.config.TwitterToKafkaServiceConfigData;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.exception.TwitterToKafkaServiceException;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.listener.TwitterKafkaStatusListener;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.runner.StreamRunner;

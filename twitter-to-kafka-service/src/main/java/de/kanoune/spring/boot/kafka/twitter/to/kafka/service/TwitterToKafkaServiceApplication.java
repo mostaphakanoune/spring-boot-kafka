@@ -1,6 +1,6 @@
 package de.kanoune.spring.boot.kafka.twitter.to.kafka.service;
 
-import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.config.TwitterToKafkaServiceConfigData;
+import de.kanoune.spring.boot.kafka.app.config.data.config.TwitterToKafkaServiceConfigData;
 import de.kanoune.spring.boot.kafka.twitter.to.kafka.service.runner.StreamRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
