@@ -1,6 +1,6 @@
 package de.kanoune.spring.boot.kafka.kafka.producer.service.impl;
 
-import de.kanoune.microservices.kafka.avro.model.TwitterAvroModel;
+import de.kanoune.spring.boot.kafka.avro.model.TwitterAvroModel;
 import de.kanoune.spring.boot.kafka.kafka.producer.service.KafkaProducer;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
 
     private static final Logger LOG = LoggerFactory.getLogger(TwitterKafkaProducer.class);
 
-    private KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate;
+    private final KafkaTemplate<Long, TwitterAvroModel> kafkaTemplate;
 
     public TwitterKafkaProducer(KafkaTemplate<Long, TwitterAvroModel> template) {
         this.kafkaTemplate = template;
