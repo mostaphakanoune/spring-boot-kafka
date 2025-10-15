@@ -7,6 +7,7 @@ import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.CreateTopicsResult;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.admin.TopicListing;
+;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
@@ -16,6 +17,7 @@ import org.springframework.retry.support.RetryTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.ClientResponse;
 import org.springframework.web.reactive.function.client.WebClient;
+
 
 import java.util.Collection;
 import java.util.List;
@@ -36,6 +38,7 @@ public class KafkaAdminClient {
    private final AdminClient adminClient;
 
    private final RetryTemplate retryTemplate;
+
    private final WebClient webClient;
 
    public KafkaAdminClient(KafkaConfigData config,
@@ -47,7 +50,7 @@ public class KafkaAdminClient {
         this.retryConfigData = retryConfigData;
         this.adminClient = client;
         this.retryTemplate = template;
-       this.webClient = webClient;
+        this.webClient = webClient;
    }
 
     public void createTopics()  {
@@ -82,11 +85,13 @@ public class KafkaAdminClient {
         Integer maxRetry = retryConfigData.getMaxAttempts();
         int multiplier = retryConfigData.getMultiplier().intValue();
         Long sleepTimeMs = retryConfigData.getSleepTimeMs();
-        while (!getSchemaRegistryStatus().is2xxSuccessful()) {
+        /*while (!getSchemaRegistryStatus().is2xxSuccessful()) {
             checkMaxRetry(retryCount++, maxRetry);
             sleep(sleepTimeMs);
             sleepTimeMs *= multiplier;
         }
+
+         */
     }
 
     private HttpStatus getSchemaRegistryStatus() {
@@ -94,7 +99,8 @@ public class KafkaAdminClient {
             return (HttpStatus) webClient
                     .method(HttpMethod.GET)
                     .uri(kafkaConfigData.getSchemaRegistryUrl())
-                    .exchange()
+                    .retrieve()
+                    .bodyToMono(ClientResponse.class)
                     .map(ClientResponse::statusCode)
                     .block();
         } catch (Exception e) {
@@ -125,7 +131,7 @@ public class KafkaAdminClient {
 
     private CreateTopicsResult doCreateTopics(RetryContext retryContext) {
         List<String> topicNames = kafkaConfigData.getTopicNamesToCreate();
-        LOG.info("Creating {} topics(s), attempt {}", topicNames.size(), retryContext.getRetryCount());
+        //LOG.info("Creating {} topics(s), attempt {}", topicNames.size(), retryContext.getRetryCount());
         List<NewTopic> kafkaTopics = topicNames.stream().map(topic -> new NewTopic(
                 topic.trim(),
                 kafkaConfigData.getNumOfPartitions(),

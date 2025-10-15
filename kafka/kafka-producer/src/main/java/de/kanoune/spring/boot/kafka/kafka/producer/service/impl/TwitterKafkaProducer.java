@@ -10,6 +10,7 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
 
+
 import javax.annotation.PreDestroy;
 import java.util.concurrent.CompletableFuture;
 
@@ -34,6 +35,7 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
         addCallback(topicName, message, kafkaResultFuture);
 
     }
+
 
     @PreDestroy
     public void close() {
@@ -61,4 +63,5 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
                     return null;
                 });
     }
+
 }
