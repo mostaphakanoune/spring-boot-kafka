@@ -17,6 +17,7 @@
         <module>app-config-data</module>
         <module>kafka</module>
         <module>common-config</module>
+        <module>config-server</module>
     </modules>
 
     <properties>
@@ -34,6 +35,8 @@
         <spring-kafka.version>3.3.7</spring-kafka.version>
         <spring-retry.version>1.3.0</spring-retry.version>
         <kafka-avro-serializer.version>5.5.1</kafka-avro-serializer.version>
+        <spring-cloud.version>4.3.0</spring-cloud.version>
+        <spring-cloud-dependencies.version>Hoxton.SR9</spring-cloud-dependencies.version>
     </properties>
 
     <repositories>
@@ -130,7 +133,18 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-config-server</artifactId>
+                <version>${spring-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-dependencies.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-test</artifactId>
