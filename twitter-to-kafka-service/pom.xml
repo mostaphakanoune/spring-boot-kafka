@@ -15,18 +15,9 @@
         </dependency>
         <dependency>
             <groupId>de.kanoune.spring.boot.kafka</groupId>
-            <artifactId>kafka-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>de.kanoune.spring.boot.kafka</groupId>
             <artifactId>kafka-producer</artifactId>
         </dependency>
-<!--
-        <dependency>
-            <groupId>de.kanoune.spring.boot.kafka</groupId>
-            <artifactId>kafka-admin</artifactId>
-        </dependency>
--->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -49,16 +40,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>org.springframework.retry</groupId>
-            <artifactId>spring-retry</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webflux</artifactId>
-        </dependency>
-        -->
     </dependencies>
 
     <build>
@@ -66,6 +47,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <name>${project.groupId}/twitter.to.kafka.service:${project.version}</name>
+                    </image>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!--
+                        <phase>install</phase>
+                        -->
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
