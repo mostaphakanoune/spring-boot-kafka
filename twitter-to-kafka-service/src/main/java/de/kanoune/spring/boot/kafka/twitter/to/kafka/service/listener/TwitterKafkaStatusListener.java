@@ -21,6 +21,13 @@ public class TwitterKafkaStatusListener extends StatusAdapter {
 
     private final TwitterStatusToAvroTransformer twitterStatusToAvroTransformer;
 
+    public TwitterKafkaStatusListener() {
+
+        kafkaConfigData = null;
+        kafkaProducer = null;
+        twitterStatusToAvroTransformer = null;
+    }
+
     public TwitterKafkaStatusListener(KafkaConfigData kafkaConfigData, KafkaProducer<Long, TwitterAvroModel> kafkaProducer, TwitterStatusToAvroTransformer twitterStatusToAvroTransformer) {
         this.kafkaConfigData = kafkaConfigData;
         this.kafkaProducer = kafkaProducer;

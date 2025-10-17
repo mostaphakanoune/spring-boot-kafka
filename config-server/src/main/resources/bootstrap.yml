@@ -1,6 +1,8 @@
 spring:
   application:
     name: configserver
+  #profiles:
+    #active: native
   cloud:
     config:
       server:
@@ -8,3 +10,4 @@ spring:
           uri: file://dev/SpringbootProjects/spring-boot-kafka/config-server-repo
           clone-on-start: true
     fail-fast: true
+

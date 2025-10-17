@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 
 
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
 @Service
 public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroModel> {
@@ -28,11 +29,10 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
     @Override
     public void send(String topicName, Long key, TwitterAvroModel message) {
 
-        LOG.info("Sending message='{}' to topic '{}'", message, topicName);
-        CompletableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture =
-                (CompletableFuture<SendResult<Long, TwitterAvroModel>>) kafkaTemplate.send(topicName, key, message);
+        LOG.info("Sending message='{}' to topic='{}'", message, topicName);
+        CompletableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture = kafkaTemplate.send(topicName, key, message);
 
-        addCallback(topicName, message, kafkaResultFuture);
+        kafkaResultFuture.whenComplete(getCallback(topicName, message));
 
     }
 
@@ -45,23 +45,20 @@ public class TwitterKafkaProducer implements KafkaProducer<Long, TwitterAvroMode
         }
     }
 
-    private static void addCallback(String topicName, TwitterAvroModel message, CompletableFuture<SendResult<Long, TwitterAvroModel>> kafkaResultFuture) {
-        // Chaining the asynchronous computations
-        kafkaResultFuture.thenAccept(
-                        result -> {
-                            System.out.println("Message sent successfully: " + result);
-                            final RecordMetadata metadata = result.getRecordMetadata();
-                            LOG.debug("Received new metadata, Topic: {}, Partition {}; Offset {}; Timestamp {}, at time {}",
-                                    metadata.topic(),
-                                    metadata.partition(),
-                                    metadata.offset(),
-                                    metadata.timestamp(),
-                                    System.nanoTime());
-                        })
-                .exceptionally(e -> {
-                    LOG.debug("Error while sending message {} to topic {}", message.toString(), topicName, e);
-                    return null;
-                });
+    private BiConsumer<? super SendResult<Long, TwitterAvroModel>, ? super Throwable> getCallback(String topicName, TwitterAvroModel message) {
+        return (result, ex) -> {
+            if (ex == null) {
+                RecordMetadata metadata = result.getRecordMetadata();
+                LOG.info("Received new metadata. Topic: {}; Partition {}; Offset {}; Timestamp {}, at time {}",
+                        metadata.topic(),
+                        metadata.partition(),
+                        metadata.offset(),
+                        metadata.timestamp(),
+                        System.nanoTime());
+            } else {
+                LOG.error("Error while sending message {} to topic {}", message.toString(), topicName, ex);
+            }
+        };
     }
 
 }

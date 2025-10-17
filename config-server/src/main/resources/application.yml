@@ -5,3 +5,20 @@ logging:
   level:
     ROOT: INFO
     org.spring.framework.cloud.config: DEBUG
+
+
+spring:
+  application:
+    name: configserver
+    #profiles:
+    #active: native
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://dev/SpringbootProjects/spring-boot-kafka/config-server-repo
+          clone-on-start: true
+    fail-fast: true
+
+
+

@@ -66,6 +66,11 @@ public class MockKafkaStreamRunner implements StreamRunner {
 
     private static final String TWITTER_STATUS_DATE_FORMAT = "EEE MMM dd HH:mm:ss zzz yyyy";
 
+    public MockKafkaStreamRunner() {
+        twitterToKafkaServiceConfigData = null;
+        twitterKafkaStatusListener = null;
+    }
+
     public MockKafkaStreamRunner(TwitterToKafkaServiceConfigData configData,
                                  TwitterKafkaStatusListener statusListener) {
         this.twitterToKafkaServiceConfigData = configData;
@@ -74,14 +79,15 @@ public class MockKafkaStreamRunner implements StreamRunner {
 
     @Override
     public void run() throws TwitterException {
+
         final String[] keywords = twitterToKafkaServiceConfigData.getTwitterKeywords().toArray(new String[0]);
         final int minTweetLength = twitterToKafkaServiceConfigData.getMockMinTweetLength();
         final int maxTweetLength = twitterToKafkaServiceConfigData.getMockMaxTweetLength();
         long sleepTimeMs = twitterToKafkaServiceConfigData.getMockSleepMs();
         LOG.info("Starting mock filtering twitter streams for keywords {}", Arrays.toString(keywords));
         simulateTwitterStream(keywords, minTweetLength, maxTweetLength, sleepTimeMs);
-    }
 
+    }
     private void simulateTwitterStream(String[] keywords, int minTweetLength, int maxTweetLength, long sleepTimeMs) {
         Executors.newSingleThreadExecutor().submit(() -> {
             try {
