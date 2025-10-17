@@ -16,3 +16,5 @@ log:
 
 twitter-to-kafka-service:
   enable-mock-tweets: true
+
+
