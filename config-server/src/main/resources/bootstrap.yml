@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: file://dev/SpringbootProjects/spring-boot-kafka/config-server-repo
+          uri: file://C:/dev/springBootProjects/spring-boot-kafka/config-server-repo
           clone-on-start: true
     fail-fast: true
 
