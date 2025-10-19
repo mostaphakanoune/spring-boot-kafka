@@ -7,7 +7,10 @@ spring:
     config:
       server:
         git:
-          uri: file://C:/dev/springBootProjects/spring-boot-kafka/config-server-repo
+          uri: https://github.com/mostaphakanoune/spring-cloud-config-server-repo
+          default-label: main
+          username: mostaphakanoune
+          password: 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
           clone-on-start: true
     fail-fast: true
 
