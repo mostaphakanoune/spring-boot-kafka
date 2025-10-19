@@ -166,6 +166,11 @@
                 <artifactId>spring-cloud-starter-bootstrap</artifactId>
                 <version>${spring-cloud-starter-bootstrap.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-security</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
@@ -178,7 +183,6 @@
                 <version>${json.version}</version>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
             <dependency>
                 <groupId>org.aspectj</groupId>
                 <artifactId>aspectjweaver</artifactId>

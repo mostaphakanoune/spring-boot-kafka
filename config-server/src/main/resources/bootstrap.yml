@@ -9,7 +9,11 @@ spring:
         git:
           uri: https://github.com/mostaphakanoune/spring-cloud-config-server-repo
           username: mostaphakanoune
-          password: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+          password: xxxxxxxxxxxxxxxxxxxxxxxxx
           default-label: main
           clone-on-start: true
     fail-fast: true
+  security:
+    user:
+      name: spring_cloud_user
+      password: springCloud_Pwd!
