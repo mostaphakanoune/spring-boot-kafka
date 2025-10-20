@@ -9,11 +9,12 @@ spring:
         git:
           uri: https://github.com/mostaphakanoune/spring-cloud-config-server-repo
           username: mostaphakanoune
-          password: xxxxxxxxxxxxxxxxxxxxxxxxx
+          password: ENC(VqSSHZCo8GzdEUGvRdAAT5t3rM+Lod+R/LUSIO2gWsq6y3WFMrrPLcQ5dxqVCOj4DXdXybT593ALu3GhEoDcpcqsTTGLNDqKGSsdoxTTxjM=)
           default-label: main
           clone-on-start: true
     fail-fast: true
   security:
     user:
       name: spring_cloud_user
-      password: springCloud_Pwd!
+      password: ENC(M4lZVxvedwcA3jCPlbjZG1lXSvLdbmy/7cgEtDluSJxUiIdzDfZyGzh7EJVd5jb1gj6uANWS0BznuPBspqAGCw==)
+
