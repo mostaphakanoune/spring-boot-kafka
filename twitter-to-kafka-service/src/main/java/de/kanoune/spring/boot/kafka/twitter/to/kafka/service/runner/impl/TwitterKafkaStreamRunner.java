@@ -12,7 +12,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
 
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import java.util.Arrays;
 
 @Component
@@ -42,7 +42,7 @@ public class TwitterKafkaStreamRunner implements StreamRunner {
     @PreDestroy
     public void shutdown() {
         if(twitterStream != null) {
-            LOG.info("Closing  twitter stream");
+            LOG.info("Closing  twitter stream!");
             twitterStream.shutdown();
         }
     }
@@ -54,3 +54,5 @@ public class TwitterKafkaStreamRunner implements StreamRunner {
         LOG.info("Started filtering twitter stream for keywords {}", Arrays.toString(keywords));
     }
 }
+
+
